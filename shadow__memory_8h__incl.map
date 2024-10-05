@@ -1,0 +1,33 @@
+<map id="/home/runner/work/cbmc/cbmc/src/goto&#45;symex/shadow_memory.h" name="/home/runner/work/cbmc/cbmc/src/goto&#45;symex/shadow_memory.h">
+<area shape="rect" id="node1" title="Symex Shadow Memory Instrumentation." alt="" coords="450,5,670,61"/>
+<area shape="rect" id="node2" href="$expr_8h.html" title=" " alt="" coords="639,199,726,225"/>
+<area shape="rect" id="node29" href="$src_2util_2message_8h.html" title=" " alt="" coords="199,423,318,449"/>
+<area shape="rect" id="node30" href="$shadow__memory__field__definitions_8h.html" title="Symex Shadow Memory Field Definitions." alt="" coords="475,109,645,151"/>
+<area shape="rect" id="node3" href="$as__const_8h.html" title=" " alt="" coords="960,721,1051,748"/>
+<area shape="rect" id="node4" href="$type_8h.html" title="Defines typet, type_with_subtypet and type_with_subtypest." alt="" coords="582,273,645,300"/>
+<area shape="rect" id="node25" href="$validation__mode_8h.html" title=" " alt="" coords="858,423,1001,449"/>
+<area shape="rect" id="node26" href="$validate__types_8h.html" title=" " alt="" coords="732,348,863,375"/>
+<area shape="rect" id="node27" href="$validate__expressions_8h.html" title=" " alt="" coords="721,273,893,300"/>
+<area shape="rect" id="node28" title=" " alt="" coords="297,497,383,524"/>
+<area shape="rect" id="node5" href="$source__location_8h.html" title=" " alt="" coords="408,497,544,524"/>
+<area shape="rect" id="node23" href="$validate_8h.html" title=" " alt="" coords="570,348,657,375"/>
+<area shape="rect" id="node6" href="$deprecate_8h.html" title=" " alt="" coords="296,572,395,599"/>
+<area shape="rect" id="node7" href="$irep_8h.html" title=" " alt="" coords="517,572,576,599"/>
+<area shape="rect" id="node8" title=" " alt="" coords="217,871,276,897"/>
+<area shape="rect" id="node22" title=" " alt="" coords="419,572,493,599"/>
+<area shape="rect" id="node9" title=" " alt="" coords="435,647,498,673"/>
+<area shape="rect" id="node10" href="$src_2util_2invariant_8h.html" title=" " alt="" coords="574,796,666,823"/>
+<area shape="rect" id="node14" href="$irep__ids_8h.html" title="util" alt="" coords="275,647,360,673"/>
+<area shape="rect" id="node18" href="$forward__list__as__map_8h.html" title=" " alt="" coords="705,647,874,673"/>
+<area shape="rect" id="node11" title=" " alt="" coords="587,871,653,897"/>
+<area shape="rect" id="node12" title=" " alt="" coords="68,871,143,897"/>
+<area shape="rect" id="node13" title=" " alt="" coords="850,871,942,897"/>
+<area shape="rect" id="node15" href="$dstring_8h.html" title="Container for C&#45;Strings." alt="" coords="246,721,325,748"/>
+<area shape="rect" id="node17" title=" " alt="" coords="349,721,448,748"/>
+<area shape="rect" id="node16" title=" " alt="" coords="195,796,259,823"/>
+<area shape="rect" id="node19" title=" " alt="" coords="747,721,832,748"/>
+<area shape="rect" id="node20" title=" " alt="" coords="624,721,723,748"/>
+<area shape="rect" id="node21" href="$narrow_8h.html" title=" " alt="" coords="857,721,935,748"/>
+<area shape="rect" id="node24" href="$exception__utils_8h.html" title=" " alt="" coords="547,423,680,449"/>
+<area shape="rect" id="node31" title=" " alt="" coords="535,199,585,225"/>
+</map>
