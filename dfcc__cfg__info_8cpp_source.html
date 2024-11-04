@@ -339,295 +339,297 @@ $(document).ready(function(){initNavTree('dfcc__cfg__info_8cpp_source.html','');
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;}</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno"><a class="line" href="dfcc__cfg__info_8cpp.html#af945bfed67dca5baaea0c57d76cb4bc0">  258</a></span>&#160;<span class="keyword">static</span> std::unordered_set&lt;irep_idt&gt; <a class="code" href="dfcc__cfg__info_8cpp.html#af945bfed67dca5baaea0c57d76cb4bc0">gen_loop_locals_set</a>(</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <span class="keyword">const</span> <a class="code" href="classgrapht.html">dfcc_loop_nesting_grapht</a> &amp;loop_nesting_graph,</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="keyword">const</span> std::size_t loop_id)</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;{</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  std::unordered_set&lt;irep_idt&gt; loop_locals;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;target : loop_nesting_graph[loop_id].instructions)</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  {</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keyword">auto</span> loop_id_opt = <a class="code" href="dfcc__loop__tags_8cpp.html#ac5360f67808b81d974bfa3658953de4a">dfcc_get_loop_id</a>(target);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">if</span>(</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;      target-&gt;is_decl() &amp;&amp; loop_id_opt.has_value() &amp;&amp;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;      loop_id_opt.value() == loop_id)</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    {</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      loop_locals.insert(target-&gt;decl_symbol().get_identifier());</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    }</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  }</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  <span class="keywordflow">return</span> loop_locals;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;}</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00289"></a><span class="lineno"><a class="line" href="dfcc__cfg__info_8cpp.html#a2d4ed373dcb4b286ba74fc561175194a">  289</a></span>&#160;<span class="keyword">static</span> std::unordered_set&lt;irep_idt&gt; <a class="code" href="dfcc__cfg__info_8cpp.html#a8590c82b7b9bf53ddfa93a02e7b621e5">gen_tracked_set</a>(</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  <span class="keyword">const</span> std::vector&lt;std::size_t&gt; &amp;inner_loops_ids,</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  <span class="keyword">const</span> std::unordered_set&lt;irep_idt&gt; &amp;locals,</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  <a class="code" href="classdirtyt.html">dirtyt</a> &amp;dirty,</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  <span class="keyword">const</span> std::map&lt;std::size_t, dfcc_loop_infot&gt; &amp;loop_info_map)</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;{</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;  std::unordered_set&lt;irep_idt&gt; tracked;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;ident : locals)</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  {</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">if</span>(dirty(ident))</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;      tracked.insert(ident);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    }</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    {</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;      <span class="comment">// Check if this ident is touched by one of the inner loops</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;      <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> inner_loop_id : inner_loops_ids)</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;      {</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="dfcc__cfg__info_8cpp.html#a2600a90a8733ffcfba9b351c9cc905f1">is_assigned</a>(dirty, ident, loop_info_map.at(inner_loop_id).assigns))</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;          tracked.insert(ident);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;      }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    }</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;  }</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <span class="keywordflow">return</span> tracked;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno"><a class="line" href="structcontract__clausest.html">  315</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structcontract__clausest.html">contract_clausest</a></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;{</div>
-<div class="line"><a name="l00317"></a><span class="lineno"><a class="line" href="structcontract__clausest.html#ac3e892e8f3be5a7030117ba29836f95b">  317</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="structcontract__clausest.html#ac3e892e8f3be5a7030117ba29836f95b">contract_clausest</a>(<span class="keyword">const</span> <a class="code" href="classexprt.html#a10c073e5cdd14b181d56cf53def8b378">exprt::operandst</a> &amp;decreases)</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    : <a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a>(<a class="code" href="classnil__exprt.html">nil_exprt</a>()), <a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>(), <a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>(decreases)</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  {</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  }</div>
-<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">  321</a></span>&#160;  <a class="code" href="classexprt.html">exprt</a> <a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a>;</div>
-<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">  322</a></span>&#160;  <a class="code" href="havoc__utils_8h.html#a3cb48127eadbd7ae4878b91c91439bee">assignst</a> <a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>;</div>
-<div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">  323</a></span>&#160;  <a class="code" href="classexprt.html#a10c073e5cdd14b181d56cf53def8b378">exprt::operandst</a> <a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;};</div>
+<div class="line"><a name="l00269"></a><span class="lineno"><a class="line" href="dfcc__cfg__info_8cpp.html#a56226414b217df9451120518cca03f56">  269</a></span>&#160;<span class="keyword">static</span> std::unordered_set&lt;irep_idt&gt; <a class="code" href="dfcc__cfg__info_8cpp.html#a8590c82b7b9bf53ddfa93a02e7b621e5">gen_tracked_set</a>(</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  <span class="keyword">const</span> std::vector&lt;std::size_t&gt; &amp;inner_loops_ids,</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="keyword">const</span> std::unordered_set&lt;irep_idt&gt; &amp;locals,</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <a class="code" href="classdirtyt.html">dirtyt</a> &amp;dirty,</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  <span class="keyword">const</span> std::map&lt;std::size_t, dfcc_loop_infot&gt; &amp;loop_info_map)</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;{</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  std::unordered_set&lt;irep_idt&gt; tracked;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;ident : locals)</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordflow">if</span>(dirty(ident))</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    {</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;      tracked.insert(ident);</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    }</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;      <span class="comment">// Check if this ident is touched by one of the inner loops</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;      <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> inner_loop_id : inner_loops_ids)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;      {</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="dfcc__cfg__info_8cpp.html#a2600a90a8733ffcfba9b351c9cc905f1">is_assigned</a>(dirty, ident, loop_info_map.at(inner_loop_id).assigns))</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;          tracked.insert(ident);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;      }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    }</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  }</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  <span class="keywordflow">return</span> tracked;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;}</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00295"></a><span class="lineno"><a class="line" href="structcontract__clausest.html">  295</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structcontract__clausest.html">contract_clausest</a></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;{</div>
+<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="structcontract__clausest.html#ac3e892e8f3be5a7030117ba29836f95b">  297</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="structcontract__clausest.html#ac3e892e8f3be5a7030117ba29836f95b">contract_clausest</a>(<span class="keyword">const</span> <a class="code" href="classexprt.html#a10c073e5cdd14b181d56cf53def8b378">exprt::operandst</a> &amp;decreases)</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    : <a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a>(<a class="code" href="classnil__exprt.html">nil_exprt</a>()), <a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>(), <a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>(decreases)</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  }</div>
+<div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">  301</a></span>&#160;  <a class="code" href="classexprt.html">exprt</a> <a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a>;</div>
+<div class="line"><a name="l00302"></a><span class="lineno"><a class="line" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">  302</a></span>&#160;  <a class="code" href="havoc__utils_8h.html#a3cb48127eadbd7ae4878b91c91439bee">assignst</a> <a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>;</div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">  303</a></span>&#160;  <a class="code" href="classexprt.html#a10c073e5cdd14b181d56cf53def8b378">exprt::operandst</a> <a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;};</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structcontract__clausest.html">contract_clausest</a> <a class="code" href="dfcc__cfg__info_8cpp.html#a56226414b217df9451120518cca03f56">default_loop_contract_clauses</a>(</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  const <a class="code" href="classgrapht.html">dfcc_loop_nesting_grapht</a> &amp;loop_nesting_graph,</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  <span class="keyword">const</span> std::size_t loop_id,</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;  <span class="keyword">const</span> <a class="code" href="classdstringt.html">irep_idt</a> &amp;function_id,</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <a class="code" href="classgoto__functiont.html">goto_functiont</a> &amp;goto_function,</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  <a class="code" href="classlocal__may__aliast.html">local_may_aliast</a> &amp;local_may_alias,</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span> check_side_effect,</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  <a class="code" href="classmessage__handlert.html">message_handlert</a> &amp;message_handler,</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  <span class="keyword">const</span> <a class="code" href="classnamespacet.html">namespacet</a> &amp;ns)</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;{</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;  <a class="code" href="classmessaget.html">messaget</a> <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>(message_handler);</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> &amp;loop = loop_nesting_graph[loop_id];</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;  <span class="comment">// Process loop contract clauses</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  <a class="code" href="classexprt.html#a10c073e5cdd14b181d56cf53def8b378">exprt::operandst</a> invariant_clauses =</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <a class="code" href="utils_8cpp.html#a929deb561fc3d5cd888d383f25b5f091">get_loop_invariants</a>(loop.latch, check_side_effect).<a class="code" href="classexprt.html#ab33453726d7cb050fc23fb9b9d2375ac">operands</a>();</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;  <a class="code" href="classexprt.html#a10c073e5cdd14b181d56cf53def8b378">exprt::operandst</a> assigns_clauses = <a class="code" href="utils_8cpp.html#a3a877a2a163b03545e093c694671a414">get_loop_assigns</a>(loop.latch).<a class="code" href="classexprt.html#ab33453726d7cb050fc23fb9b9d2375ac">operands</a>();</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structcontract__clausest.html">contract_clausest</a> <a class="code" href="dfcc__cfg__info_8cpp.html#a2d4ed373dcb4b286ba74fc561175194a">default_loop_contract_clauses</a>(</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  const <a class="code" href="classgrapht.html">dfcc_loop_nesting_grapht</a> &amp;loop_nesting_graph,</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  <span class="keyword">const</span> std::size_t loop_id,</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="keyword">const</span> <a class="code" href="classdstringt.html">irep_idt</a> &amp;function_id,</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  <a class="code" href="classlocal__may__aliast.html">local_may_aliast</a> &amp;local_may_alias,</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span> check_side_effect,</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  <a class="code" href="classmessage__handlert.html">message_handlert</a> &amp;message_handler,</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  <span class="keyword">const</span> <a class="code" href="classnamespacet.html">namespacet</a> &amp;ns)</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;{</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  <a class="code" href="classmessaget.html">messaget</a> <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>(message_handler);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> &amp;loop = loop_nesting_graph[loop_id];</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  <span class="comment">// Process loop contract clauses</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  <a class="code" href="classexprt.html#a10c073e5cdd14b181d56cf53def8b378">exprt::operandst</a> invariant_clauses =</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <a class="code" href="utils_8cpp.html#a929deb561fc3d5cd888d383f25b5f091">get_loop_invariants</a>(loop.latch, check_side_effect).<a class="code" href="classexprt.html#ab33453726d7cb050fc23fb9b9d2375ac">operands</a>();</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;  <a class="code" href="classexprt.html#a10c073e5cdd14b181d56cf53def8b378">exprt::operandst</a> assigns_clauses = <a class="code" href="utils_8cpp.html#a3a877a2a163b03545e093c694671a414">get_loop_assigns</a>(loop.latch).<a class="code" href="classexprt.html#ab33453726d7cb050fc23fb9b9d2375ac">operands</a>();</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;  <span class="comment">// Initialise defaults</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;  <span class="keyword">struct </span><a class="code" href="structcontract__clausest.html">contract_clausest</a> result(</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <a class="code" href="utils_8cpp.html#adaa48ac6b8c3f4b51102692af3359bfb">get_loop_decreases</a>(loop.latch, check_side_effect).operands());</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;  <span class="comment">// Generate defaults for all clauses if at least one type of clause is defined</span></div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;  <span class="keywordflow">if</span>(</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    !invariant_clauses.empty() || !result.<a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>.empty() ||</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    !assigns_clauses.empty())</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  {</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">if</span>(invariant_clauses.empty())</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="comment">// Initialise defaults</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="keyword">struct </span><a class="code" href="structcontract__clausest.html">contract_clausest</a> result(</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <a class="code" href="utils_8cpp.html#adaa48ac6b8c3f4b51102692af3359bfb">get_loop_decreases</a>(loop.latch, check_side_effect).operands());</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  <span class="comment">// Generate defaults for all clauses if at least one type of clause is defined</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="keywordflow">if</span>(</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    !invariant_clauses.empty() || !result.<a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>.empty() ||</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    !assigns_clauses.empty())</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  {</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordflow">if</span>(invariant_clauses.empty())</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    {</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;      <span class="comment">// use a default invariant if none given.</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;      result.<a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a> = <a class="code" href="classtrue__exprt.html">true_exprt</a>{};</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;      <span class="comment">// assigns clause is missing; we will try to automatic inference</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;      <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;No invariant provided for loop &quot;</span> &lt;&lt; function_id &lt;&lt; <span class="stringliteral">&quot;.&quot;</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                    &lt;&lt; loop.latch-&gt;loop_number &lt;&lt; <span class="stringliteral">&quot; at &quot;</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                    &lt;&lt; loop.head-&gt;source_location()</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;. Using &#39;true&#39; as a sound default invariant. Please &quot;</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                       <span class="stringliteral">&quot;provide an invariant the default is too weak.&quot;</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                    &lt;&lt; <a class="code" href="classmessaget.html#af53bf1a50370a1e7ad55df9dd0e6fdd0">messaget::eom</a>;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    }</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;      <span class="comment">// conjoin all invariant clauses</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;      result.<a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a> = <a class="code" href="std__expr_8cpp.html#a009993933b4e656e434c7b1a51b83291">conjunction</a>(invariant_clauses);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="comment">// unpack assigns clause targets</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">if</span>(!assigns_clauses.empty())</div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    {</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      <span class="comment">// use a default invariant if none given.</span></div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      result.<a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a> = <a class="code" href="classtrue__exprt.html">true_exprt</a>{};</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;      <span class="comment">// assigns clause is missing; we will try to automatic inference</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;      <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;No invariant provided for loop &quot;</span> &lt;&lt; function_id &lt;&lt; <span class="stringliteral">&quot;.&quot;</span></div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                    &lt;&lt; loop.latch-&gt;loop_number &lt;&lt; <span class="stringliteral">&quot; at &quot;</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                    &lt;&lt; loop.head-&gt;source_location()</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;. Using &#39;true&#39; as a sound default invariant. Please &quot;</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                       <span class="stringliteral">&quot;provide an invariant the default is too weak.&quot;</span></div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                    &lt;&lt; <a class="code" href="classmessaget.html#af53bf1a50370a1e7ad55df9dd0e6fdd0">messaget::eom</a>;</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    }</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    {</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;      <span class="comment">// conjoin all invariant clauses</span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;      result.<a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a> = <a class="code" href="std__expr_8cpp.html#a009993933b4e656e434c7b1a51b83291">conjunction</a>(invariant_clauses);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    }</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="comment">// unpack assigns clause targets</span></div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">if</span>(!assigns_clauses.empty())</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    {</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      <span class="keywordflow">for</span>(<span class="keyword">auto</span> &amp;operand : assigns_clauses)</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;      {</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        result.<a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>.insert(operand);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;      <span class="keywordflow">for</span>(<span class="keyword">auto</span> &amp;operand : assigns_clauses)</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      {</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        result.<a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>.insert(operand);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;      }</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    }</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    {</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;      <span class="comment">// infer assigns clause targets if none given</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;      <span class="keyword">auto</span> inferred = <a class="code" href="dfcc__infer__loop__assigns_8cpp.html#a170b44ba425fd0a2070efadbe544e386">dfcc_infer_loop_assigns</a>(</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        local_may_alias, goto_function, loop, message_handler, ns);</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;      <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;No assigns clause provided for loop &quot;</span> &lt;&lt; function_id</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; loop.latch-&gt;loop_number &lt;&lt; <span class="stringliteral">&quot; at &quot;</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                    &lt;&lt; loop.head-&gt;source_location() &lt;&lt; <span class="stringliteral">&quot;. The inferred set {&quot;</span>;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;      <span class="keywordtype">bool</span> first = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;      <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;expr : inferred)</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;      {</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keywordflow">if</span>(!first)</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;          <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;        }</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;        first = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;        <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <a class="code" href="format_8h.html#a74b453cb3c0deb818d6f2e0f683996ca">format</a>(expr);</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;      }</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    }</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    {</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;      <span class="comment">// infer assigns clause targets if none given</span></div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;      <span class="keyword">auto</span> inferred = <a class="code" href="dfcc__infer__loop__assigns_8cpp.html#a5d6d3dee17a9b651a1690a77e3bf29fb">dfcc_infer_loop_assigns</a>(</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        local_may_alias, loop.instructions, loop.head-&gt;source_location(), ns);</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;      <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;No assigns clause provided for loop &quot;</span> &lt;&lt; function_id</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; loop.latch-&gt;loop_number &lt;&lt; <span class="stringliteral">&quot; at &quot;</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                    &lt;&lt; loop.head-&gt;source_location() &lt;&lt; <span class="stringliteral">&quot;. The inferred set {&quot;</span>;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;      <span class="keywordtype">bool</span> first = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;      <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;expr : inferred)</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;      {</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordflow">if</span>(!first)</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        {</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;          <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        }</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        first = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <a class="code" href="format_8h.html#a74b453cb3c0deb818d6f2e0f683996ca">format</a>(expr);</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;      }</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;      <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;} might be incomplete or imprecise, please provide an &quot;</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                       <span class="stringliteral">&quot;assigns clause if the analysis fails.&quot;</span></div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                    &lt;&lt; <a class="code" href="classmessaget.html#af53bf1a50370a1e7ad55df9dd0e6fdd0">messaget::eom</a>;</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;      result.<a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>.swap(inferred);</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    }</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <span class="keywordflow">if</span>(result.<a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>.empty())</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    {</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;      <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;No decrease clause provided for loop &quot;</span> &lt;&lt; function_id</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; loop.latch-&gt;loop_number &lt;&lt; <span class="stringliteral">&quot; at &quot;</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                    &lt;&lt; loop.head-&gt;source_location()</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;. Termination will not be checked.&quot;</span> &lt;&lt; <a class="code" href="classmessaget.html#af53bf1a50370a1e7ad55df9dd0e6fdd0">messaget::eom</a>;</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    }</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;  }</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;}</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno"><a class="line" href="dfcc__cfg__info_8cpp.html#a57fe35c339568253ae3a8554d77c5793">  415</a></span>&#160;<span class="keyword">static</span> <a class="code" href="classdfcc__loop__infot.html">dfcc_loop_infot</a> <a class="code" href="dfcc__cfg__info_8cpp.html#a57fe35c339568253ae3a8554d77c5793">gen_dfcc_loop_info</a>(</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;  <span class="keyword">const</span> <a class="code" href="classgrapht.html">dfcc_loop_nesting_grapht</a> &amp;loop_nesting_graph,</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;  <span class="keyword">const</span> std::size_t loop_id,</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  <span class="keyword">const</span> <a class="code" href="classdstringt.html">irep_idt</a> &amp;function_id,</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  <span class="keyword">const</span> std::map&lt;std::size_t, dfcc_loop_infot&gt; &amp;loop_info_map,</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;  <a class="code" href="classdirtyt.html">dirtyt</a> &amp;dirty,</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;  <a class="code" href="classlocal__may__aliast.html">local_may_aliast</a> &amp;local_may_alias,</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span> check_side_effect,</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;  <a class="code" href="classmessage__handlert.html">message_handlert</a> &amp;message_handler,</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;  <a class="code" href="classdfcc__libraryt.html">dfcc_libraryt</a> &amp;library,</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;  <a class="code" href="classsymbol__table__baset.html">symbol_table_baset</a> &amp;symbol_table)</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;{</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;  std::unordered_set&lt;irep_idt&gt; loop_locals =</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <a class="code" href="dfcc__cfg__info_8cpp.html#af945bfed67dca5baaea0c57d76cb4bc0">gen_loop_locals_set</a>(loop_nesting_graph, loop_id);</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;  std::unordered_set&lt;irep_idt&gt; loop_tracked = <a class="code" href="dfcc__cfg__info_8cpp.html#a8590c82b7b9bf53ddfa93a02e7b621e5">gen_tracked_set</a>(</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    loop_nesting_graph.<a class="code" href="classgrapht.html#a1f8437457e04afcd50087e2d3f6cdec7">get_predecessors</a>(loop_id),</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    loop_locals,</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    dirty,</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    loop_info_map);</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  <span class="keyword">const</span> <a class="code" href="classnamespacet.html">namespacet</a> ns(symbol_table);</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;  <span class="keyword">struct </span><a class="code" href="structcontract__clausest.html">contract_clausest</a> contract_clauses = <a class="code" href="dfcc__cfg__info_8cpp.html#a2d4ed373dcb4b286ba74fc561175194a">default_loop_contract_clauses</a>(</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    loop_nesting_graph,</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    loop_id,</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    function_id,</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    local_may_alias,</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    check_side_effect,</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    message_handler,</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    ns);</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; </div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;  std::set&lt;std::size_t&gt; inner_loops;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">auto</span> pred_idx : loop_nesting_graph.<a class="code" href="classgrapht.html#a1f8437457e04afcd50087e2d3f6cdec7">get_predecessors</a>(loop_id))</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;  {</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    inner_loops.insert(pred_idx);</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;  }</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;  std::set&lt;std::size_t&gt; outer_loops;</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">auto</span> succ_idx : loop_nesting_graph.<a class="code" href="classgrapht.html#ad9e6520aa0812d344d51e0d6adbfd8ee">get_successors</a>(loop_id))</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;  {</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    outer_loops.insert(succ_idx);</div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;  }</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;  <span class="keyword">auto</span> &amp;loop = loop_nesting_graph[loop_id];</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> cbmc_loop_number = loop.latch-&gt;loop_number;</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;  <span class="comment">// Generate &quot;write set&quot; variable</span></div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> write_set_var = <a class="code" href="structdfcc__utilst.html#abccf2341a66f1185db919141f8350cd7">dfcc_utilst::create_symbol</a>(</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    symbol_table,</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    library.<a class="code" href="classdfcc__libraryt.html#ac7712832fdd39b8df8039e790cbc41d5">dfcc_type</a>[<a class="code" href="dfcc__library_8h.html#afa825bddfe01a78991bfae7f91471a52a11269270b69396baa4a85008f725147a">dfcc_typet::WRITE_SET</a>],</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    function_id,</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    <span class="stringliteral">&quot;__write_set_loop_&quot;</span> + <a class="code" href="string__constraint_8cpp.html#a72759a5f821d21176866b7bf77d1142b">std::to_string</a>(cbmc_loop_number),</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    loop.head-&gt;source_location());</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160; </div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;  <span class="comment">// Generate &quot;address of write set&quot; variable</span></div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> &amp;addr_of_write_set_var = <a class="code" href="structdfcc__utilst.html#abccf2341a66f1185db919141f8350cd7">dfcc_utilst::create_symbol</a>(</div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    symbol_table,</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;    library.<a class="code" href="classdfcc__libraryt.html#ac7712832fdd39b8df8039e790cbc41d5">dfcc_type</a>[<a class="code" href="dfcc__library_8h.html#afa825bddfe01a78991bfae7f91471a52ae87f4506b2a8ac93aa498e1df617ef4f">dfcc_typet::WRITE_SET_PTR</a>],</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    function_id,</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    <span class="stringliteral">&quot;__address_of_write_set_loop_&quot;</span> + <a class="code" href="string__constraint_8cpp.html#a72759a5f821d21176866b7bf77d1142b">std::to_string</a>(cbmc_loop_number),</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;    loop.head-&gt;source_location());</div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160; </div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;  <span class="keywordflow">return</span> {</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    loop_id,</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;    cbmc_loop_number,</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    contract_clauses.<a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>,</div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    contract_clauses.<a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a>,</div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    contract_clauses.<a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>,</div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    loop_locals,</div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    loop_tracked,</div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;    inner_loops,</div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;    outer_loops,</div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    write_set_var,</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    addr_of_write_set_var};</div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;}</div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
-<div class="line"><a name="l00491"></a><span class="lineno"><a class="line" href="classdfcc__cfg__infot.html#a68e4b051e1f1118f9d077d55ce5426b2">  491</a></span>&#160;<a class="code" href="classdfcc__cfg__infot.html#a68e4b051e1f1118f9d077d55ce5426b2">dfcc_cfg_infot::dfcc_cfg_infot</a>(</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;  <span class="keyword">const</span> <a class="code" href="classdstringt.html">irep_idt</a> &amp;function_id,</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;  <a class="code" href="classgoto__functiont.html">goto_functiont</a> &amp;goto_function,</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;  <span class="keyword">const</span> <a class="code" href="classexprt.html">exprt</a> &amp;top_level_write_set,</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;  <span class="keyword">const</span> <a class="code" href="structloop__contract__configt.html">loop_contract_configt</a> &amp;loop_contract_config,</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;  <a class="code" href="classsymbol__table__baset.html">symbol_table_baset</a> &amp;symbol_table,</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;  <a class="code" href="classmessage__handlert.html">message_handlert</a> &amp;message_handler,</div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;  <a class="code" href="classdfcc__libraryt.html">dfcc_libraryt</a> &amp;library)</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;  : function_id(function_id),</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    goto_function(goto_function),</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    top_level_write_set(top_level_write_set),</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    ns(symbol_table)</div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;{</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;  <a class="code" href="classgrapht.html">dfcc_loop_nesting_grapht</a> loop_nesting_graph;</div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;  <a class="code" href="classgoto__programt.html">goto_programt</a> &amp;goto_program = <a class="code" href="classdfcc__cfg__infot.html#a7b2c770e97dde27d8d33b0fa16ec2556">goto_function</a>.<a class="code" href="classgoto__functiont.html#a2374f74a53fbd62d61a683fc6d4b5a62">body</a>;</div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160; </div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;  <span class="comment">// Clean up possible fake loops that are due to do { ... } while(0);</span></div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;  <a class="code" href="utils_8cpp.html#a90cb59d025201658c14ea7cb25f17d35">simplify_gotos</a>(goto_program, <a class="code" href="classdfcc__cfg__infot.html#a36ddb9bc1cbd404404ce7221ccd24c9a">ns</a>);</div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160; </div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;  <span class="keywordflow">if</span>(loop_contract_config.<a class="code" href="structloop__contract__configt.html#a350dfde74e3b22c08b037b62fe385a5b">apply_loop_contracts</a>)</div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;  {</div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;    <a class="code" href="classmessaget.html">messaget</a> <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>(message_handler);</div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;    <a class="code" href="dfcc__check__loop__normal__form_8cpp.html#ae3be37b468c7f0e9d46e93292b4411a4">dfcc_check_loop_normal_form</a>(goto_program, <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>);</div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    loop_nesting_graph = <a class="code" href="dfcc__loop__nesting__graph_8cpp.html#a659db86426aaaa687d3431da1b7cb278">build_loop_nesting_graph</a>(goto_program);</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160; </div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> head = <a class="code" href="dfcc__cfg__info_8cpp.html#a2b399ff97b508fe5e3893c84ab136a3c">check_inner_loops_have_contracts</a>(</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;      loop_nesting_graph, loop_contract_config.<a class="code" href="structloop__contract__configt.html#adc7d4ea1c56d0376843bd910c75535cb">check_side_effect</a>);</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    <span class="keywordflow">if</span>(head.has_value())</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;    {</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classinvalid__source__file__exceptiont.html">invalid_source_file_exceptiont</a>(</div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        <span class="stringliteral">&quot;Found loop without contract nested in a loop with a &quot;</span></div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        <span class="stringliteral">&quot;contract.\nPlease &quot;</span></div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;        <span class="stringliteral">&quot;provide a contract or unwind this loop before applying loop &quot;</span></div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        <span class="stringliteral">&quot;contracts.&quot;</span>,</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;        head.value()-&gt;source_location());</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    }</div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160; </div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    <span class="keyword">auto</span> topsorted = loop_nesting_graph.<a class="code" href="classgrapht.html#ae99cfa74808773651ae42d7567b92903">topsort</a>();</div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160; </div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> idx : topsorted)</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    {</div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;      <a class="code" href="classdfcc__cfg__infot.html#a401d3535ff3463121b1e3c9aaa8151e4">topsorted_loops</a>.push_back(idx);</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    }</div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;  }</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160; </div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;  <span class="comment">// At this point, either loop contracts were activated and the loop nesting</span></div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;  <span class="comment">// graph describes the loop structure of the function,</span></div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;  <span class="comment">// or loop contracts were not activated and the loop nesting graph is empty</span></div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;  <span class="comment">// (i.e. there might be some loops in the function but we won&#39;t consider them</span></div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;  <span class="comment">// for the instrumentation).</span></div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;  <span class="comment">// In both cases, we tag program instructions and generate the dfcc_cfg_infot</span></div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;  <span class="comment">// instance from that graph&#39;s contents. The tags will decide against which</span></div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;  <span class="comment">// write set the instructions are going to be instrumented (either the</span></div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;  <span class="comment">// function&#39;s write set, or the write set of a loop), and each dfcc_loop_infot</span></div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;  <span class="comment">// contained in the loop_info_map describes a loop to be abstracted by a</span></div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;  <span class="comment">// contract.</span></div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160; </div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;  <a class="code" href="dfcc__cfg__info_8cpp.html#a49b41f868b8aa1491017595ca177b28e">tag_loop_instructions</a>(goto_program, loop_nesting_graph);</div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160; </div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;  <span class="comment">// generate dfcc_cfg_loop_info for loops and add to loop_info_map</span></div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;  <a class="code" href="classdirtyt.html">dirtyt</a> dirty(<a class="code" href="classdfcc__cfg__infot.html#a7b2c770e97dde27d8d33b0fa16ec2556">goto_function</a>);</div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;  <a class="code" href="classlocal__may__aliast.html">local_may_aliast</a> local_may_alias(<a class="code" href="classdfcc__cfg__infot.html#a7b2c770e97dde27d8d33b0fa16ec2556">goto_function</a>);</div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160; </div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;loop_id : <a class="code" href="classdfcc__cfg__infot.html#a401d3535ff3463121b1e3c9aaa8151e4">topsorted_loops</a>)</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;  {</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;    <a class="code" href="classdfcc__cfg__infot.html#aef94d5df9a8ea9ca48aa58c2fc727544">loop_info_map</a>.insert(</div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;      {loop_id,</div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;       <a class="code" href="dfcc__cfg__info_8cpp.html#a57fe35c339568253ae3a8554d77c5793">gen_dfcc_loop_info</a>(</div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;         loop_nesting_graph,</div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;         loop_id,</div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;         <a class="code" href="classdfcc__cfg__infot.html#ae5e21d2677b966153c375f8bd4536ca4">function_id</a>,</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;      <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;} might be incomplete or imprecise, please provide an &quot;</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                       <span class="stringliteral">&quot;assigns clause if the analysis fails.&quot;</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                    &lt;&lt; <a class="code" href="classmessaget.html#af53bf1a50370a1e7ad55df9dd0e6fdd0">messaget::eom</a>;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;      result.<a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>.swap(inferred);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">if</span>(result.<a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>.empty())</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    {</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;      <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>.warning() &lt;&lt; <span class="stringliteral">&quot;No decrease clause provided for loop &quot;</span> &lt;&lt; function_id</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;.&quot;</span> &lt;&lt; loop.latch-&gt;loop_number &lt;&lt; <span class="stringliteral">&quot; at &quot;</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                    &lt;&lt; loop.head-&gt;source_location()</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                    &lt;&lt; <span class="stringliteral">&quot;. Termination will not be checked.&quot;</span> &lt;&lt; <a class="code" href="classmessaget.html#af53bf1a50370a1e7ad55df9dd0e6fdd0">messaget::eom</a>;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;  }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;}</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
+<div class="line"><a name="l00396"></a><span class="lineno"><a class="line" href="dfcc__cfg__info_8cpp.html#a15d3b9f17c528e9c1590fbffd4895be3">  396</a></span>&#160;<span class="keyword">static</span> <a class="code" href="classdfcc__loop__infot.html">dfcc_loop_infot</a> <a class="code" href="dfcc__cfg__info_8cpp.html#a15d3b9f17c528e9c1590fbffd4895be3">gen_dfcc_loop_info</a>(</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;  <span class="keyword">const</span> <a class="code" href="classgrapht.html">dfcc_loop_nesting_grapht</a> &amp;loop_nesting_graph,</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;  <span class="keyword">const</span> std::size_t loop_id,</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;  <span class="keyword">const</span> <a class="code" href="classdstringt.html">irep_idt</a> &amp;function_id,</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;  <a class="code" href="classgoto__functiont.html">goto_functiont</a> &amp;goto_function,</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;  <span class="keyword">const</span> std::map&lt;std::size_t, dfcc_loop_infot&gt; &amp;loop_info_map,</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;  <a class="code" href="classdirtyt.html">dirtyt</a> &amp;dirty,</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;  <a class="code" href="classlocal__may__aliast.html">local_may_aliast</a> &amp;local_may_alias,</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">bool</span> check_side_effect,</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;  <a class="code" href="classmessage__handlert.html">message_handlert</a> &amp;message_handler,</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;  <a class="code" href="classdfcc__libraryt.html">dfcc_libraryt</a> &amp;library,</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;  <a class="code" href="classsymbol__table__baset.html">symbol_table_baset</a> &amp;symbol_table)</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;{</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  <span class="keyword">const</span> <a class="code" href="classnamespacet.html">namespacet</a> ns(symbol_table);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;  std::unordered_set&lt;irep_idt&gt; loop_locals = <a class="code" href="dfcc__infer__loop__assigns_8cpp.html#aab2307e2c63bdd371b30a05b070e237f">gen_loop_locals_set</a>(</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    function_id,</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    goto_function,</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    loop_nesting_graph[loop_id],</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    message_handler,</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    ns);</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;  <span class="comment">// Exclude locals of inner nested loops.</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;inner_loop : loop_nesting_graph.<a class="code" href="classgrapht.html#a1f8437457e04afcd50087e2d3f6cdec7">get_predecessors</a>(loop_id))</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  {</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <a class="code" href="validation__mode_8h.html#a5b0354803e00f78ad34e28f69aff6ea9abdbe9b3e99678fa8369d445ccf769ccc">INVARIANT</a>(</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;      loop_info_map.find(inner_loop) != loop_info_map.end(),</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;      <span class="stringliteral">&quot;DFCC should gen_dfcc_loop_info for inner loops first.&quot;</span>);</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;inner_local : loop_info_map.at(inner_loop).local)</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    {</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;      loop_locals.erase(inner_local);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    }</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;  }</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160; </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;  std::unordered_set&lt;irep_idt&gt; loop_tracked = <a class="code" href="dfcc__cfg__info_8cpp.html#a8590c82b7b9bf53ddfa93a02e7b621e5">gen_tracked_set</a>(</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    loop_nesting_graph.<a class="code" href="classgrapht.html#a1f8437457e04afcd50087e2d3f6cdec7">get_predecessors</a>(loop_id),</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    loop_locals,</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    dirty,</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    loop_info_map);</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;  <span class="keyword">struct </span><a class="code" href="structcontract__clausest.html">contract_clausest</a> contract_clauses = <a class="code" href="dfcc__cfg__info_8cpp.html#a56226414b217df9451120518cca03f56">default_loop_contract_clauses</a>(</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    loop_nesting_graph,</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    loop_id,</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    function_id,</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    goto_function,</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    local_may_alias,</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    check_side_effect,</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    message_handler,</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    ns);</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  std::set&lt;std::size_t&gt; inner_loops;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">auto</span> pred_idx : loop_nesting_graph.<a class="code" href="classgrapht.html#a1f8437457e04afcd50087e2d3f6cdec7">get_predecessors</a>(loop_id))</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;  {</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    inner_loops.insert(pred_idx);</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;  }</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;  std::set&lt;std::size_t&gt; outer_loops;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">auto</span> succ_idx : loop_nesting_graph.<a class="code" href="classgrapht.html#ad9e6520aa0812d344d51e0d6adbfd8ee">get_successors</a>(loop_id))</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;  {</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    outer_loops.insert(succ_idx);</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;  }</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;  <span class="keyword">auto</span> &amp;loop = loop_nesting_graph[loop_id];</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> cbmc_loop_number = loop.latch-&gt;loop_number;</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160; </div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;  <span class="comment">// Generate &quot;write set&quot; variable</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> write_set_var = <a class="code" href="structdfcc__utilst.html#abccf2341a66f1185db919141f8350cd7">dfcc_utilst::create_symbol</a>(</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    symbol_table,</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    library.<a class="code" href="classdfcc__libraryt.html#ac7712832fdd39b8df8039e790cbc41d5">dfcc_type</a>[<a class="code" href="dfcc__library_8h.html#afa825bddfe01a78991bfae7f91471a52a11269270b69396baa4a85008f725147a">dfcc_typet::WRITE_SET</a>],</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    function_id,</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    <span class="stringliteral">&quot;__write_set_loop_&quot;</span> + <a class="code" href="string__constraint_8cpp.html#a72759a5f821d21176866b7bf77d1142b">std::to_string</a>(cbmc_loop_number),</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    loop.head-&gt;source_location());</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; </div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;  <span class="comment">// Generate &quot;address of write set&quot; variable</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> &amp;addr_of_write_set_var = <a class="code" href="structdfcc__utilst.html#abccf2341a66f1185db919141f8350cd7">dfcc_utilst::create_symbol</a>(</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;    symbol_table,</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    library.<a class="code" href="classdfcc__libraryt.html#ac7712832fdd39b8df8039e790cbc41d5">dfcc_type</a>[<a class="code" href="dfcc__library_8h.html#afa825bddfe01a78991bfae7f91471a52ae87f4506b2a8ac93aa498e1df617ef4f">dfcc_typet::WRITE_SET_PTR</a>],</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;    function_id,</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    <span class="stringliteral">&quot;__address_of_write_set_loop_&quot;</span> + <a class="code" href="string__constraint_8cpp.html#a72759a5f821d21176866b7bf77d1142b">std::to_string</a>(cbmc_loop_number),</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    loop.head-&gt;source_location());</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;  <span class="keywordflow">return</span> {</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;    loop_id,</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    cbmc_loop_number,</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;    contract_clauses.<a class="code" href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">assigns</a>,</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    contract_clauses.<a class="code" href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">invariant_expr</a>,</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    contract_clauses.<a class="code" href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">decreases_clauses</a>,</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    loop_locals,</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    loop_tracked,</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    inner_loops,</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;    outer_loops,</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;    write_set_var,</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    addr_of_write_set_var};</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;}</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160; </div>
+<div class="line"><a name="l00490"></a><span class="lineno"><a class="line" href="classdfcc__cfg__infot.html#a68e4b051e1f1118f9d077d55ce5426b2">  490</a></span>&#160;<a class="code" href="classdfcc__cfg__infot.html#a68e4b051e1f1118f9d077d55ce5426b2">dfcc_cfg_infot::dfcc_cfg_infot</a>(</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;  <span class="keyword">const</span> <a class="code" href="classdstringt.html">irep_idt</a> &amp;function_id,</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;  <a class="code" href="classgoto__functiont.html">goto_functiont</a> &amp;goto_function,</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;  <span class="keyword">const</span> <a class="code" href="classexprt.html">exprt</a> &amp;top_level_write_set,</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;  <span class="keyword">const</span> <a class="code" href="structloop__contract__configt.html">loop_contract_configt</a> &amp;loop_contract_config,</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;  <a class="code" href="classsymbol__table__baset.html">symbol_table_baset</a> &amp;symbol_table,</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;  <a class="code" href="classmessage__handlert.html">message_handlert</a> &amp;message_handler,</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;  <a class="code" href="classdfcc__libraryt.html">dfcc_libraryt</a> &amp;library)</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;  : function_id(function_id),</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    goto_function(goto_function),</div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    top_level_write_set(top_level_write_set),</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    ns(symbol_table)</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;{</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;  <a class="code" href="classgrapht.html">dfcc_loop_nesting_grapht</a> loop_nesting_graph;</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;  <a class="code" href="classgoto__programt.html">goto_programt</a> &amp;goto_program = <a class="code" href="classdfcc__cfg__infot.html#a7b2c770e97dde27d8d33b0fa16ec2556">goto_function</a>.<a class="code" href="classgoto__functiont.html#a2374f74a53fbd62d61a683fc6d4b5a62">body</a>;</div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160; </div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;  <span class="comment">// Clean up possible fake loops that are due to do { ... } while(0);</span></div>
+<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;  <a class="code" href="utils_8cpp.html#a90cb59d025201658c14ea7cb25f17d35">simplify_gotos</a>(goto_program, <a class="code" href="classdfcc__cfg__infot.html#a36ddb9bc1cbd404404ce7221ccd24c9a">ns</a>);</div>
+<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160; </div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;  <span class="keywordflow">if</span>(loop_contract_config.<a class="code" href="structloop__contract__configt.html#a350dfde74e3b22c08b037b62fe385a5b">apply_loop_contracts</a>)</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;  {</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;    <a class="code" href="classmessaget.html">messaget</a> <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>(message_handler);</div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;    <a class="code" href="dfcc__check__loop__normal__form_8cpp.html#ae3be37b468c7f0e9d46e93292b4411a4">dfcc_check_loop_normal_form</a>(goto_program, <a class="code" href="math_8c.html#adb302c9aafbaa5e180d9f60ee954bb82">log</a>);</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;    loop_nesting_graph = <a class="code" href="dfcc__loop__nesting__graph_8cpp.html#a659db86426aaaa687d3431da1b7cb278">build_loop_nesting_graph</a>(goto_program);</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160; </div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> head = <a class="code" href="dfcc__cfg__info_8cpp.html#a2b399ff97b508fe5e3893c84ab136a3c">check_inner_loops_have_contracts</a>(</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;      loop_nesting_graph, loop_contract_config.<a class="code" href="structloop__contract__configt.html#adc7d4ea1c56d0376843bd910c75535cb">check_side_effect</a>);</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;    <span class="keywordflow">if</span>(head.has_value())</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    {</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;      <span class="keywordflow">throw</span> <a class="code" href="classinvalid__source__file__exceptiont.html">invalid_source_file_exceptiont</a>(</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;        <span class="stringliteral">&quot;Found loop without contract nested in a loop with a &quot;</span></div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;        <span class="stringliteral">&quot;contract.\nPlease &quot;</span></div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        <span class="stringliteral">&quot;provide a contract or unwind this loop before applying loop &quot;</span></div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;        <span class="stringliteral">&quot;contracts.&quot;</span>,</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;        head.value()-&gt;source_location());</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    }</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160; </div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;    <span class="keyword">auto</span> topsorted = loop_nesting_graph.<a class="code" href="classgrapht.html#ae99cfa74808773651ae42d7567b92903">topsort</a>();</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> idx : topsorted)</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    {</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;      <a class="code" href="classdfcc__cfg__infot.html#a401d3535ff3463121b1e3c9aaa8151e4">topsorted_loops</a>.push_back(idx);</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    }</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;  }</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160; </div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;  <span class="comment">// At this point, either loop contracts were activated and the loop nesting</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;  <span class="comment">// graph describes the loop structure of the function,</span></div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;  <span class="comment">// or loop contracts were not activated and the loop nesting graph is empty</span></div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;  <span class="comment">// (i.e. there might be some loops in the function but we won&#39;t consider them</span></div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;  <span class="comment">// for the instrumentation).</span></div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;  <span class="comment">// In both cases, we tag program instructions and generate the dfcc_cfg_infot</span></div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;  <span class="comment">// instance from that graph&#39;s contents. The tags will decide against which</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;  <span class="comment">// write set the instructions are going to be instrumented (either the</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;  <span class="comment">// function&#39;s write set, or the write set of a loop), and each dfcc_loop_infot</span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;  <span class="comment">// contained in the loop_info_map describes a loop to be abstracted by a</span></div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;  <span class="comment">// contract.</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160; </div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;  <a class="code" href="dfcc__cfg__info_8cpp.html#a49b41f868b8aa1491017595ca177b28e">tag_loop_instructions</a>(goto_program, loop_nesting_graph);</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160; </div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;  <span class="comment">// generate dfcc_cfg_loop_info for loops and add to loop_info_map</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;  <a class="code" href="classdirtyt.html">dirtyt</a> dirty(<a class="code" href="classdfcc__cfg__infot.html#a7b2c770e97dde27d8d33b0fa16ec2556">goto_function</a>);</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;  <a class="code" href="classlocal__may__aliast.html">local_may_aliast</a> local_may_alias(<a class="code" href="classdfcc__cfg__infot.html#a7b2c770e97dde27d8d33b0fa16ec2556">goto_function</a>);</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160; </div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;loop_id : <a class="code" href="classdfcc__cfg__infot.html#a401d3535ff3463121b1e3c9aaa8151e4">topsorted_loops</a>)</div>
+<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;  {</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;    <a class="code" href="classdfcc__cfg__infot.html#aef94d5df9a8ea9ca48aa58c2fc727544">loop_info_map</a>.insert(</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;      {loop_id,</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;       <a class="code" href="dfcc__cfg__info_8cpp.html#a15d3b9f17c528e9c1590fbffd4895be3">gen_dfcc_loop_info</a>(</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;         loop_nesting_graph,</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;         loop_id,</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;         <a class="code" href="classdfcc__cfg__infot.html#ae5e21d2677b966153c375f8bd4536ca4">function_id</a>,</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;         <a class="code" href="classdfcc__cfg__infot.html#a7b2c770e97dde27d8d33b0fa16ec2556">goto_function</a>,</div>
 <div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;         <a class="code" href="classdfcc__cfg__infot.html#aef94d5df9a8ea9ca48aa58c2fc727544">loop_info_map</a>,</div>
 <div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;         dirty,</div>
 <div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;         local_may_alias,</div>
@@ -966,7 +968,7 @@ $(document).ready(function(){initNavTree('dfcc__cfg__info_8cpp_source.html','');
 <div class="ttc" id="aclassdfcc__cfg__infot_html_a519cef9a0785239283213f8c65d7b3f1"><div class="ttname"><a href="classdfcc__cfg__infot.html#a519cef9a0785239283213f8c65d7b3f1">dfcc_cfg_infot::is_top_level_id</a></div><div class="ttdeci">bool is_top_level_id(const std::size_t id) const</div><div class="ttdoc">True iff id is in the valid range for a loop id for this function.</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00747">dfcc_cfg_info.cpp:747</a></div></div>
 <div class="ttc" id="aclassdfcc__cfg__infot_html_a563f1c474d385eb43343bf34f5ed740c"><div class="ttname"><a href="classdfcc__cfg__infot.html#a563f1c474d385eb43343bf34f5ed740c">dfcc_cfg_infot::get_loop_info</a></div><div class="ttdeci">const dfcc_loop_infot &amp; get_loop_info(const std::size_t loop_id) const</div><div class="ttdoc">Returns the loop info for that loop_id.</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00710">dfcc_cfg_info.cpp:710</a></div></div>
 <div class="ttc" id="aclassdfcc__cfg__infot_html_a5a0467a5099cc2d051bcdeeef77479af"><div class="ttname"><a href="classdfcc__cfg__infot.html#a5a0467a5099cc2d051bcdeeef77479af">dfcc_cfg_infot::output</a></div><div class="ttdeci">void output(std::ostream &amp;out) const</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00591">dfcc_cfg_info.cpp:591</a></div></div>
-<div class="ttc" id="aclassdfcc__cfg__infot_html_a68e4b051e1f1118f9d077d55ce5426b2"><div class="ttname"><a href="classdfcc__cfg__infot.html#a68e4b051e1f1118f9d077d55ce5426b2">dfcc_cfg_infot::dfcc_cfg_infot</a></div><div class="ttdeci">dfcc_cfg_infot(const irep_idt &amp;function_id, goto_functiont &amp;goto_function, const exprt &amp;top_level_write_set, const loop_contract_configt &amp;loop_contract_config, symbol_table_baset &amp;symbol_table, message_handlert &amp;message_handler, dfcc_libraryt &amp;library)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00491">dfcc_cfg_info.cpp:491</a></div></div>
+<div class="ttc" id="aclassdfcc__cfg__infot_html_a68e4b051e1f1118f9d077d55ce5426b2"><div class="ttname"><a href="classdfcc__cfg__infot.html#a68e4b051e1f1118f9d077d55ce5426b2">dfcc_cfg_infot::dfcc_cfg_infot</a></div><div class="ttdeci">dfcc_cfg_infot(const irep_idt &amp;function_id, goto_functiont &amp;goto_function, const exprt &amp;top_level_write_set, const loop_contract_configt &amp;loop_contract_config, symbol_table_baset &amp;symbol_table, message_handlert &amp;message_handler, dfcc_libraryt &amp;library)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00490">dfcc_cfg_info.cpp:490</a></div></div>
 <div class="ttc" id="aclassdfcc__cfg__infot_html_a7b2c770e97dde27d8d33b0fa16ec2556"><div class="ttname"><a href="classdfcc__cfg__infot.html#a7b2c770e97dde27d8d33b0fa16ec2556">dfcc_cfg_infot::goto_function</a></div><div class="ttdeci">goto_functiont &amp; goto_function</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8h_source.html#l00317">dfcc_cfg_info.h:317</a></div></div>
 <div class="ttc" id="aclassdfcc__cfg__infot_html_a8355ce67810f24973a2b0ce7951a2629"><div class="ttname"><a href="classdfcc__cfg__infot.html#a8355ce67810f24973a2b0ce7951a2629">dfcc_cfg_infot::top_level_loops</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; top_level_loops</div><div class="ttdoc">Loop identifiers for top level loops (ie for loops that are not nested in in another loop).</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8h_source.html#l00339">dfcc_cfg_info.h:339</a></div></div>
 <div class="ttc" id="aclassdfcc__cfg__infot_html_a879fae9bc403c0071bbb25509bf3c486"><div class="ttname"><a href="classdfcc__cfg__infot.html#a879fae9bc403c0071bbb25509bf3c486">dfcc_cfg_infot::get_tracked_set</a></div><div class="ttdeci">const std::unordered_set&lt; irep_idt &gt; &amp; get_tracked_set(goto_programt::const_targett target) const</div><div class="ttdoc">Returns the subset of local variable that are explicitly tracked in the write set for the scope where...</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00665">dfcc_cfg_info.cpp:665</a></div></div>
@@ -1026,20 +1028,20 @@ $(document).ready(function(){initNavTree('dfcc__cfg__info_8cpp_source.html','');
 <div class="ttc" id="aclasssymbol__exprt_html_a8dc820d1f2bbd1c5d9144ad4849c2d4c"><div class="ttname"><a href="classsymbol__exprt.html#a8dc820d1f2bbd1c5d9144ad4849c2d4c">symbol_exprt::get_identifier</a></div><div class="ttdeci">const irep_idt &amp; get_identifier() const</div><div class="ttdef"><b>Definition:</b> <a href="std__expr_8h_source.html#l00160">std_expr.h:160</a></div></div>
 <div class="ttc" id="aclasssymbol__table__baset_html"><div class="ttname"><a href="classsymbol__table__baset.html">symbol_table_baset</a></div><div class="ttdoc">The symbol table base class interface.</div><div class="ttdef"><b>Definition:</b> <a href="symbol__table__base_8h_source.html#l00022">symbol_table_base.h:23</a></div></div>
 <div class="ttc" id="aclasstrue__exprt_html"><div class="ttname"><a href="classtrue__exprt.html">true_exprt</a></div><div class="ttdoc">The Boolean constant true.</div><div class="ttdef"><b>Definition:</b> <a href="std__expr_8h_source.html#l03062">std_expr.h:3063</a></div></div>
+<div class="ttc" id="adfcc__cfg__info_8cpp_html_a15d3b9f17c528e9c1590fbffd4895be3"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a15d3b9f17c528e9c1590fbffd4895be3">gen_dfcc_loop_info</a></div><div class="ttdeci">static dfcc_loop_infot gen_dfcc_loop_info(const dfcc_loop_nesting_grapht &amp;loop_nesting_graph, const std::size_t loop_id, const irep_idt &amp;function_id, goto_functiont &amp;goto_function, const std::map&lt; std::size_t, dfcc_loop_infot &gt; &amp;loop_info_map, dirtyt &amp;dirty, local_may_aliast &amp;local_may_alias, const bool check_side_effect, message_handlert &amp;message_handler, dfcc_libraryt &amp;library, symbol_table_baset &amp;symbol_table)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00396">dfcc_cfg_info.cpp:396</a></div></div>
 <div class="ttc" id="adfcc__cfg__info_8cpp_html_a2600a90a8733ffcfba9b351c9cc905f1"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a2600a90a8733ffcfba9b351c9cc905f1">is_assigned</a></div><div class="ttdeci">static bool is_assigned(dirtyt &amp;dirty, const irep_idt &amp;ident, assignst assigns)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00227">dfcc_cfg_info.cpp:227</a></div></div>
 <div class="ttc" id="adfcc__cfg__info_8cpp_html_a2b399ff97b508fe5e3893c84ab136a3c"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a2b399ff97b508fe5e3893c84ab136a3c">check_inner_loops_have_contracts</a></div><div class="ttdeci">static std::optional&lt; goto_programt::targett &gt; check_inner_loops_have_contracts(const dfcc_loop_nesting_grapht &amp;loop_nesting_graph, const bool check_side_effect)</div><div class="ttdoc">Traverses the loop nesting graph from top level loops and checks if all loops nested in loops that ha...</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00156">dfcc_cfg_info.cpp:156</a></div></div>
-<div class="ttc" id="adfcc__cfg__info_8cpp_html_a2d4ed373dcb4b286ba74fc561175194a"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a2d4ed373dcb4b286ba74fc561175194a">default_loop_contract_clauses</a></div><div class="ttdeci">static struct contract_clausest default_loop_contract_clauses(const dfcc_loop_nesting_grapht &amp;loop_nesting_graph, const std::size_t loop_id, const irep_idt &amp;function_id, local_may_aliast &amp;local_may_alias, const bool check_side_effect, message_handlert &amp;message_handler, const namespacet &amp;ns)</div><div class="ttdoc">Generate defaults for all contract clauses of the loop with ID loop_id if at least one type of clause...</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00289">dfcc_cfg_info.cpp:328</a></div></div>
 <div class="ttc" id="adfcc__cfg__info_8cpp_html_a3e3943ae13b1de2bb10d2cc608a27061"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a3e3943ae13b1de2bb10d2cc608a27061">has_contract</a></div><div class="ttdeci">static bool has_contract(const goto_programt::const_targett &amp;latch_target, const bool check_side_effect)</div><div class="ttdoc">Returns true iff some contract clause expression is attached to the latch condition of this loop.</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00034">dfcc_cfg_info.cpp:34</a></div></div>
 <div class="ttc" id="adfcc__cfg__info_8cpp_html_a49b41f868b8aa1491017595ca177b28e"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a49b41f868b8aa1491017595ca177b28e">tag_loop_instructions</a></div><div class="ttdeci">static void tag_loop_instructions(goto_programt &amp;goto_program, dfcc_loop_nesting_grapht &amp;loop_nesting_graph)</div><div class="ttdoc">Tags instructions of loops found in loop_nesting_graph with the loop identifier of the innermost loop...</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00176">dfcc_cfg_info.cpp:176</a></div></div>
 <div class="ttc" id="adfcc__cfg__info_8cpp_html_a543b07008907c0cea0f320c3862656aa"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a543b07008907c0cea0f320c3862656aa">must_check_lhs_from_local_and_tracked</a></div><div class="ttdeci">static bool must_check_lhs_from_local_and_tracked(const exprt &amp;lhs, const std::unordered_set&lt; irep_idt &gt; &amp;local, const std::unordered_set&lt; irep_idt &gt; &amp;tracked)</div><div class="ttdoc">Returns true if the lhs to an assignment must be checked against its write set.</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00771">dfcc_cfg_info.cpp:771</a></div></div>
-<div class="ttc" id="adfcc__cfg__info_8cpp_html_a57fe35c339568253ae3a8554d77c5793"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a57fe35c339568253ae3a8554d77c5793">gen_dfcc_loop_info</a></div><div class="ttdeci">static dfcc_loop_infot gen_dfcc_loop_info(const dfcc_loop_nesting_grapht &amp;loop_nesting_graph, const std::size_t loop_id, const irep_idt &amp;function_id, const std::map&lt; std::size_t, dfcc_loop_infot &gt; &amp;loop_info_map, dirtyt &amp;dirty, local_may_aliast &amp;local_may_alias, const bool check_side_effect, message_handlert &amp;message_handler, dfcc_libraryt &amp;library, symbol_table_baset &amp;symbol_table)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00415">dfcc_cfg_info.cpp:415</a></div></div>
-<div class="ttc" id="adfcc__cfg__info_8cpp_html_a8590c82b7b9bf53ddfa93a02e7b621e5"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a8590c82b7b9bf53ddfa93a02e7b621e5">gen_tracked_set</a></div><div class="ttdeci">static std::unordered_set&lt; irep_idt &gt; gen_tracked_set(const std::vector&lt; std::size_t &gt; &amp;inner_loops_ids, const std::unordered_set&lt; irep_idt &gt; &amp;locals, dirtyt &amp;dirty, const std::map&lt; std::size_t, dfcc_loop_infot &gt; &amp;loop_info_map)</div><div class="ttdoc">Compute subset of locals that must be tracked in the loop's write set.</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00289">dfcc_cfg_info.cpp:289</a></div></div>
+<div class="ttc" id="adfcc__cfg__info_8cpp_html_a56226414b217df9451120518cca03f56"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a56226414b217df9451120518cca03f56">default_loop_contract_clauses</a></div><div class="ttdeci">static struct contract_clausest default_loop_contract_clauses(const dfcc_loop_nesting_grapht &amp;loop_nesting_graph, const std::size_t loop_id, const irep_idt &amp;function_id, goto_functiont &amp;goto_function, local_may_aliast &amp;local_may_alias, const bool check_side_effect, message_handlert &amp;message_handler, const namespacet &amp;ns)</div><div class="ttdoc">Generate defaults for all contract clauses of the loop with ID loop_id if at least one type of clause...</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00269">dfcc_cfg_info.cpp:308</a></div></div>
+<div class="ttc" id="adfcc__cfg__info_8cpp_html_a8590c82b7b9bf53ddfa93a02e7b621e5"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#a8590c82b7b9bf53ddfa93a02e7b621e5">gen_tracked_set</a></div><div class="ttdeci">static std::unordered_set&lt; irep_idt &gt; gen_tracked_set(const std::vector&lt; std::size_t &gt; &amp;inner_loops_ids, const std::unordered_set&lt; irep_idt &gt; &amp;locals, dirtyt &amp;dirty, const std::map&lt; std::size_t, dfcc_loop_infot &gt; &amp;loop_info_map)</div><div class="ttdoc">Compute subset of locals that must be tracked in the loop's write set.</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00269">dfcc_cfg_info.cpp:269</a></div></div>
 <div class="ttc" id="adfcc__cfg__info_8cpp_html_ab356763ed4e479e9b98f5a5f34a1a944"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#ab356763ed4e479e9b98f5a5f34a1a944">check_has_contract_rec</a></div><div class="ttdeci">static std::optional&lt; goto_programt::targett &gt; check_has_contract_rec(const dfcc_loop_nesting_grapht &amp;loop_nesting_graph, const std::size_t loop_idx, const bool must_have_contract, const bool check_side_effect)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00130">dfcc_cfg_info.cpp:130</a></div></div>
-<div class="ttc" id="adfcc__cfg__info_8cpp_html_af945bfed67dca5baaea0c57d76cb4bc0"><div class="ttname"><a href="dfcc__cfg__info_8cpp.html#af945bfed67dca5baaea0c57d76cb4bc0">gen_loop_locals_set</a></div><div class="ttdeci">static std::unordered_set&lt; irep_idt &gt; gen_loop_locals_set(const dfcc_loop_nesting_grapht &amp;loop_nesting_graph, const std::size_t loop_id)</div><div class="ttdoc">Collect identifiers that are local to this loop only (excluding nested loop).</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00258">dfcc_cfg_info.cpp:258</a></div></div>
 <div class="ttc" id="adfcc__cfg__info_8h_html"><div class="ttname"><a href="dfcc__cfg__info_8h.html">dfcc_cfg_info.h</a></div><div class="ttdoc">Class that computes CFG information about the loop structure of a GOTO function for the purpose of dy...</div></div>
 <div class="ttc" id="adfcc__check__loop__normal__form_8cpp_html_ae3be37b468c7f0e9d46e93292b4411a4"><div class="ttname"><a href="dfcc__check__loop__normal__form_8cpp.html#ae3be37b468c7f0e9d46e93292b4411a4">dfcc_check_loop_normal_form</a></div><div class="ttdeci">void dfcc_check_loop_normal_form(goto_programt &amp;goto_program, messaget &amp;log)</div><div class="ttdoc">Checks and enforces normal form properties for natural loops of the given goto_program.</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__check__loop__normal__form_8cpp_source.html#l00015">dfcc_check_loop_normal_form.cpp:15</a></div></div>
 <div class="ttc" id="adfcc__check__loop__normal__form_8h_html"><div class="ttname"><a href="dfcc__check__loop__normal__form_8h.html">dfcc_check_loop_normal_form.h</a></div><div class="ttdoc">Checks normal form properties of natural loops in a GOTO program.</div></div>
-<div class="ttc" id="adfcc__infer__loop__assigns_8cpp_html_a5d6d3dee17a9b651a1690a77e3bf29fb"><div class="ttname"><a href="dfcc__infer__loop__assigns_8cpp.html#a5d6d3dee17a9b651a1690a77e3bf29fb">dfcc_infer_loop_assigns</a></div><div class="ttdeci">assignst dfcc_infer_loop_assigns(const local_may_aliast &amp;local_may_alias, const loopt &amp;loop_instructions, const source_locationt &amp;loop_head_location, const namespacet &amp;ns)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__infer__loop__assigns_8cpp_source.html#l00049">dfcc_infer_loop_assigns.cpp:49</a></div></div>
+<div class="ttc" id="adfcc__infer__loop__assigns_8cpp_html_a170b44ba425fd0a2070efadbe544e386"><div class="ttname"><a href="dfcc__infer__loop__assigns_8cpp.html#a170b44ba425fd0a2070efadbe544e386">dfcc_infer_loop_assigns</a></div><div class="ttdeci">assignst dfcc_infer_loop_assigns(const local_may_aliast &amp;local_may_alias, goto_functiont &amp;goto_function, const dfcc_loop_nesting_graph_nodet &amp;loop, message_handlert &amp;message_handler, const namespacet &amp;ns)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__infer__loop__assigns_8cpp_source.html#l00157">dfcc_infer_loop_assigns.cpp:157</a></div></div>
+<div class="ttc" id="adfcc__infer__loop__assigns_8cpp_html_aab2307e2c63bdd371b30a05b070e237f"><div class="ttname"><a href="dfcc__infer__loop__assigns_8cpp.html#aab2307e2c63bdd371b30a05b070e237f">gen_loop_locals_set</a></div><div class="ttdeci">std::unordered_set&lt; irep_idt &gt; gen_loop_locals_set(const irep_idt &amp;function_id, goto_functiont &amp;goto_function, const dfcc_loop_nesting_graph_nodet &amp;loop_node, message_handlert &amp;message_handler, const namespacet &amp;ns)</div><div class="ttdoc">Collect identifiers that are local to this loop.</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__infer__loop__assigns_8cpp_source.html#l00055">dfcc_infer_loop_assigns.cpp:55</a></div></div>
 <div class="ttc" id="adfcc__infer__loop__assigns_8h_html"><div class="ttname"><a href="dfcc__infer__loop__assigns_8h.html">dfcc_infer_loop_assigns.h</a></div><div class="ttdoc">Infer a set of assigns clause targets for a natural loop.</div></div>
 <div class="ttc" id="adfcc__is__cprover__symbol_8cpp_html_aae5f679b0752cad089c2167f71e04ed1"><div class="ttname"><a href="dfcc__is__cprover__symbol_8cpp.html#aae5f679b0752cad089c2167f71e04ed1">dfcc_is_cprover_static_symbol</a></div><div class="ttdeci">bool dfcc_is_cprover_static_symbol(const irep_idt &amp;id)</div><div class="ttdoc">Returns true iff the symbol is one of the known CPROVER static instrumentation variables or ends with...</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__is__cprover__symbol_8cpp_source.html#l00148">dfcc_is_cprover_symbol.cpp:148</a></div></div>
 <div class="ttc" id="adfcc__is__cprover__symbol_8h_html"><div class="ttname"><a href="dfcc__is__cprover__symbol_8h.html">dfcc_is_cprover_symbol.h</a></div></div>
@@ -1079,11 +1081,11 @@ $(document).ready(function(){initNavTree('dfcc__cfg__info_8cpp_source.html','');
 <div class="ttc" id="astd__expr_8cpp_html_a009993933b4e656e434c7b1a51b83291"><div class="ttname"><a href="std__expr_8cpp.html#a009993933b4e656e434c7b1a51b83291">conjunction</a></div><div class="ttdeci">exprt conjunction(const exprt::operandst &amp;op)</div><div class="ttdoc">1) generates a conjunction for two or more operands 2) for one operand, returns the operand 3) return...</div><div class="ttdef"><b>Definition:</b> <a href="std__expr_8cpp_source.html#l00083">std_expr.cpp:83</a></div></div>
 <div class="ttc" id="astd__expr_8h_html_a25f1967a7eef63b269c6ed43faee88ab"><div class="ttname"><a href="std__expr_8h.html#a25f1967a7eef63b269c6ed43faee88ab">to_symbol_expr</a></div><div class="ttdeci">const symbol_exprt &amp; to_symbol_expr(const exprt &amp;expr)</div><div class="ttdoc">Cast an exprt to a symbol_exprt.</div><div class="ttdef"><b>Definition:</b> <a href="std__expr_8h_source.html#l00272">std_expr.h:272</a></div></div>
 <div class="ttc" id="astring__constraint_8cpp_html_a72759a5f821d21176866b7bf77d1142b"><div class="ttname"><a href="string__constraint_8cpp.html#a72759a5f821d21176866b7bf77d1142b">to_string</a></div><div class="ttdeci">std::string to_string(const string_not_contains_constraintt &amp;expr)</div><div class="ttdoc">Used for debug printing.</div><div class="ttdef"><b>Definition:</b> <a href="string__constraint_8cpp_source.html#l00058">string_constraint.cpp:58</a></div></div>
-<div class="ttc" id="astructcontract__clausest_html"><div class="ttname"><a href="structcontract__clausest.html">contract_clausest</a></div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00315">dfcc_cfg_info.cpp:316</a></div></div>
-<div class="ttc" id="astructcontract__clausest_html_a3d2b4951ac91f457d5c2af2b401820bb"><div class="ttname"><a href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">contract_clausest::decreases_clauses</a></div><div class="ttdeci">exprt::operandst decreases_clauses</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00323">dfcc_cfg_info.cpp:323</a></div></div>
-<div class="ttc" id="astructcontract__clausest_html_ac3e892e8f3be5a7030117ba29836f95b"><div class="ttname"><a href="structcontract__clausest.html#ac3e892e8f3be5a7030117ba29836f95b">contract_clausest::contract_clausest</a></div><div class="ttdeci">contract_clausest(const exprt::operandst &amp;decreases)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00317">dfcc_cfg_info.cpp:317</a></div></div>
-<div class="ttc" id="astructcontract__clausest_html_ac46b94e7ad54b16bbd62b788fb540372"><div class="ttname"><a href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">contract_clausest::assigns</a></div><div class="ttdeci">assignst assigns</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00322">dfcc_cfg_info.cpp:322</a></div></div>
-<div class="ttc" id="astructcontract__clausest_html_af60c9ec062dfa1ccfd51e338c628faba"><div class="ttname"><a href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">contract_clausest::invariant_expr</a></div><div class="ttdeci">exprt invariant_expr</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00321">dfcc_cfg_info.cpp:321</a></div></div>
+<div class="ttc" id="astructcontract__clausest_html"><div class="ttname"><a href="structcontract__clausest.html">contract_clausest</a></div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00295">dfcc_cfg_info.cpp:296</a></div></div>
+<div class="ttc" id="astructcontract__clausest_html_a3d2b4951ac91f457d5c2af2b401820bb"><div class="ttname"><a href="structcontract__clausest.html#a3d2b4951ac91f457d5c2af2b401820bb">contract_clausest::decreases_clauses</a></div><div class="ttdeci">exprt::operandst decreases_clauses</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00303">dfcc_cfg_info.cpp:303</a></div></div>
+<div class="ttc" id="astructcontract__clausest_html_ac3e892e8f3be5a7030117ba29836f95b"><div class="ttname"><a href="structcontract__clausest.html#ac3e892e8f3be5a7030117ba29836f95b">contract_clausest::contract_clausest</a></div><div class="ttdeci">contract_clausest(const exprt::operandst &amp;decreases)</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00297">dfcc_cfg_info.cpp:297</a></div></div>
+<div class="ttc" id="astructcontract__clausest_html_ac46b94e7ad54b16bbd62b788fb540372"><div class="ttname"><a href="structcontract__clausest.html#ac46b94e7ad54b16bbd62b788fb540372">contract_clausest::assigns</a></div><div class="ttdeci">assignst assigns</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00302">dfcc_cfg_info.cpp:302</a></div></div>
+<div class="ttc" id="astructcontract__clausest_html_af60c9ec062dfa1ccfd51e338c628faba"><div class="ttname"><a href="structcontract__clausest.html#af60c9ec062dfa1ccfd51e338c628faba">contract_clausest::invariant_expr</a></div><div class="ttdeci">exprt invariant_expr</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__cfg__info_8cpp_source.html#l00301">dfcc_cfg_info.cpp:301</a></div></div>
 <div class="ttc" id="astructdfcc__utilst_html_abccf2341a66f1185db919141f8350cd7"><div class="ttname"><a href="structdfcc__utilst.html#abccf2341a66f1185db919141f8350cd7">dfcc_utilst::create_symbol</a></div><div class="ttdeci">static symbol_exprt create_symbol(symbol_table_baset &amp;, const typet &amp;type, const irep_idt &amp;function_id, const std::string &amp;base_name, const source_locationt &amp;source_location)</div><div class="ttdoc">Adds a new symbol named function_id::base_name of type type with given attributes in the symbol table...</div><div class="ttdef"><b>Definition:</b> <a href="dfcc__utils_8cpp_source.html#l00081">dfcc_utils.cpp:81</a></div></div>
 <div class="ttc" id="astructloop__contract__configt_html"><div class="ttname"><a href="structloop__contract__configt.html">loop_contract_configt</a></div><div class="ttdoc">Loop contract configurations.</div><div class="ttdef"><b>Definition:</b> <a href="loop__contract__config_8h_source.html#l00018">loop_contract_config.h:19</a></div></div>
 <div class="ttc" id="astructloop__contract__configt_html_a350dfde74e3b22c08b037b62fe385a5b"><div class="ttname"><a href="structloop__contract__configt.html#a350dfde74e3b22c08b037b62fe385a5b">loop_contract_configt::apply_loop_contracts</a></div><div class="ttdeci">bool apply_loop_contracts</div><div class="ttdef"><b>Definition:</b> <a href="loop__contract__config_8h_source.html#l00022">loop_contract_config.h:22</a></div></div>
@@ -1093,6 +1095,7 @@ $(document).ready(function(){initNavTree('dfcc__cfg__info_8cpp_source.html','');
 <div class="ttc" id="autils_8cpp_html_a929deb561fc3d5cd888d383f25b5f091"><div class="ttname"><a href="utils_8cpp.html#a929deb561fc3d5cd888d383f25b5f091">get_loop_invariants</a></div><div class="ttdeci">exprt get_loop_invariants(const goto_programt::const_targett &amp;loop_end, const bool check_side_effect)</div><div class="ttdoc">Extract loop invariants from annotated loop end.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8cpp_source.html#l00666">utils.cpp:666</a></div></div>
 <div class="ttc" id="autils_8cpp_html_adaa48ac6b8c3f4b51102692af3359bfb"><div class="ttname"><a href="utils_8cpp.html#adaa48ac6b8c3f4b51102692af3359bfb">get_loop_decreases</a></div><div class="ttdeci">exprt get_loop_decreases(const goto_programt::const_targett &amp;loop_end, const bool check_side_effect)</div><div class="ttdoc">Extract loop decreases from annotated loop end.</div><div class="ttdef"><b>Definition:</b> <a href="utils_8cpp_source.html#l00688">utils.cpp:688</a></div></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div></div>
+<div class="ttc" id="avalidation__mode_8h_html_a5b0354803e00f78ad34e28f69aff6ea9abdbe9b3e99678fa8369d445ccf769ccc"><div class="ttname"><a href="validation__mode_8h.html#a5b0354803e00f78ad34e28f69aff6ea9abdbe9b3e99678fa8369d445ccf769ccc">validation_modet::INVARIANT</a></div><div class="ttdeci">@ INVARIANT</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

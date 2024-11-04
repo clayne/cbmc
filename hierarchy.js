@@ -1696,7 +1696,8 @@ var hierarchy =
                 ] ],
                 [ "writeable_object_exprt", "classwriteable__object__exprt.html", null ]
               ] ],
-              [ "union_exprt", "classunion__exprt.html", null ]
+              [ "union_exprt", "classunion__exprt.html", null ],
+              [ "zero_extend_exprt", "classzero__extend__exprt.html", null ]
             ] ],
             [ "update_bit_exprt", "classupdate__bit__exprt.html", null ],
             [ "update_bits_exprt", "classupdate__bits__exprt.html", null ],

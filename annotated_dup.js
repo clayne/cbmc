@@ -1391,5 +1391,6 @@ var annotated_dup =
     [ "xml_parsert", "classxml__parsert.html", "classxml__parsert" ],
     [ "xmlt", "classxmlt.html", "classxmlt" ],
     [ "xor_exprt", "classxor__exprt.html", "classxor__exprt" ],
+    [ "zero_extend_exprt", "classzero__extend__exprt.html", "classzero__extend__exprt" ],
     [ "zip_iteratort", "structzip__iteratort.html", "structzip__iteratort" ]
 ];
