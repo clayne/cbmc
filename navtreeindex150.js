@@ -1,5 +1,8 @@
 var NAVTREEINDEX150 =
 {
+"widened__range_8cpp.html#a7c4cae6a628fb877d489bf42fd10c35a":[9,0,2,0,0,49,1],
+"widened__range_8cpp_source.html":[9,0,2,0,0,49],
+"widened__range_8h.html":[9,0,2,0,0,50],
 "widened__range_8h_source.html":[9,0,2,0,0,50],
 "windows_8c.html":[9,0,2,1,2,35],
 "windows_8c_source.html":[9,0,2,1,2,35],
