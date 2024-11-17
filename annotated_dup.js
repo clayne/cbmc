@@ -141,6 +141,7 @@ var annotated_dup =
     [ "bitor_exprt", "classbitor__exprt.html", "classbitor__exprt" ],
     [ "bitreverse_exprt", "classbitreverse__exprt.html", "classbitreverse__exprt" ],
     [ "bitvector_typet", "classbitvector__typet.html", "classbitvector__typet" ],
+    [ "bitxnor_exprt", "classbitxnor__exprt.html", "classbitxnor__exprt" ],
     [ "bitxor_exprt", "classbitxor__exprt.html", "classbitxor__exprt" ],
     [ "bool_typet", "classbool__typet.html", "classbool__typet" ],
     [ "boolbv_mapt", "classboolbv__mapt.html", "classboolbv__mapt" ],

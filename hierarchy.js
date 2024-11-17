@@ -1588,6 +1588,7 @@ var hierarchy =
               [ "array_list_exprt", "classarray__list__exprt.html", null ],
               [ "bitand_exprt", "classbitand__exprt.html", null ],
               [ "bitor_exprt", "classbitor__exprt.html", null ],
+              [ "bitxnor_exprt", "classbitxnor__exprt.html", null ],
               [ "bitxor_exprt", "classbitxor__exprt.html", null ],
               [ "concatenation_exprt", "classconcatenation__exprt.html", null ],
               [ "cond_exprt", "classcond__exprt.html", null ],
