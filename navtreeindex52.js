@@ -105,7 +105,12 @@ var NAVTREEINDEX52 =
 "classpostconditiont.html#a877558012bf7a4b73a454f5d842926b1":[8,0,924,0],
 "classpostconditiont.html#af2287d5ccac1fd6fb0a145fdf8e79a12":[8,0,924,1],
 "classpower__exprt.html":[8,0,925],
+"classpower__exprt.html#a0f6174469109068b079e97467ef591dd":[8,0,925,1],
+"classpower__exprt.html#a153fb003023d2f44a8b33152edb268ca":[8,0,925,2],
 "classpower__exprt.html#a6b9ea87fcc99a6d81dd6d8c728576722":[8,0,925,0],
+"classpower__exprt.html#a78f30edf0a5c9610412692d82a277aa3":[8,0,925,3],
+"classpower__exprt.html#a9c02db8eb0f22f4ae885cfd2bf60a873":[8,0,925,5],
+"classpower__exprt.html#aa71d7a7a72b42cdeefdae9b8dd237fac":[8,0,925,4],
 "classpreconditiont.html":[8,0,926],
 "classpreconditiont.html#a0141d7208a49ca11cfd8ced862ec633e":[8,0,926,9],
 "classpreconditiont.html#a01db002184b48d58b2b858d70b35e76e":[8,0,926,8],
@@ -244,10 +249,5 @@ var NAVTREEINDEX52 =
 "classprophecy__pointer__in__range__exprt.html#af6fd0ae28f24e6ef5f7fe2b3dabfadb2":[8,0,940,3],
 "classprophecy__pointer__in__range__exprt.html#af7a00bfc59ca61a5e467ec0dd88ffe36":[8,0,940,0],
 "classprophecy__r__ok__exprt.html":[8,0,941],
-"classprophecy__r__ok__exprt.html#a007b94612b6f1e6c7a7c5ad2e9c95b5b":[8,0,941,1],
-"classprophecy__r__ok__exprt.html#a6831bc1c2f994fee537f899b9edfe025":[8,0,941,0],
-"classprophecy__r__or__w__ok__exprt.html":[8,0,942],
-"classprophecy__r__or__w__ok__exprt.html#a0653f7d3ad0843f4753839dd586c4253":[8,0,942,0],
-"classprophecy__r__or__w__ok__exprt.html#a19ed18ff12f2e4f7331bd416bd67cb2d":[8,0,942,3],
-"classprophecy__r__or__w__ok__exprt.html#a1f6b97267c162d1e386dda231f2960c9":[8,0,942,4]
+"classprophecy__r__ok__exprt.html#a007b94612b6f1e6c7a7c5ad2e9c95b5b":[8,0,941,1]
 };

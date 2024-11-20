@@ -1,5 +1,10 @@
 var NAVTREEINDEX53 =
 {
+"classprophecy__r__ok__exprt.html#a6831bc1c2f994fee537f899b9edfe025":[8,0,941,0],
+"classprophecy__r__or__w__ok__exprt.html":[8,0,942],
+"classprophecy__r__or__w__ok__exprt.html#a0653f7d3ad0843f4753839dd586c4253":[8,0,942,0],
+"classprophecy__r__or__w__ok__exprt.html#a19ed18ff12f2e4f7331bd416bd67cb2d":[8,0,942,3],
+"classprophecy__r__or__w__ok__exprt.html#a1f6b97267c162d1e386dda231f2960c9":[8,0,942,4],
 "classprophecy__r__or__w__ok__exprt.html#a4d9201766b0947d40fc04854e273d921":[8,0,942,6],
 "classprophecy__r__or__w__ok__exprt.html#a66221e2a6f5b2e8f3cdb19ca1a90c2c0":[8,0,942,2],
 "classprophecy__r__or__w__ok__exprt.html#a7bc73a0ca17d3727f27353fca8a1fb5a":[8,0,942,8],
@@ -244,10 +249,5 @@ var NAVTREEINDEX53 =
 "classrange__spect.html#a53cceef1a7f8bd02cdb21715d9efb239":[8,0,961,4],
 "classrange__spect.html#a785dbfb31e90f48bc0dd086c61246d12":[8,0,961,1],
 "classrange__spect.html#a7c87146f636090edc38d0787ab2c500b":[8,0,961,13],
-"classrange__spect.html#a8dc42371fb6fda79eae8caf468893e45":[8,0,961,2],
-"classrange__spect.html#a8de6c2251c42df8294b2937f69703acd":[8,0,961,16],
-"classrange__spect.html#aa573efcc85da1dfc21e9239c8a305d70":[8,0,961,9],
-"classrange__spect.html#ab89bc55c4be6566563f2969d86597593":[8,0,961,7],
-"classrange__spect.html#acbdceecb249179d327b3fb89444c00ab":[8,0,961,10],
-"classrange__spect.html#adf066c67b544d86b1bdccd2baccc1ad4":[8,0,961,12]
+"classrange__spect.html#a8dc42371fb6fda79eae8caf468893e45":[8,0,961,2]
 };
