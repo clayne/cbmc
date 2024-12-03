@@ -904,6 +904,8 @@ var annotated_dup =
     [ "object_idt", "classobject__idt.html", "classobject__idt" ],
     [ "object_size_exprt", "classobject__size__exprt.html", "classobject__size__exprt" ],
     [ "offset_entryt", "classoffset__entryt.html", "classoffset__entryt" ],
+    [ "onehot0_exprt", "classonehot0__exprt.html", "classonehot0__exprt" ],
+    [ "onehot_exprt", "classonehot__exprt.html", "classonehot__exprt" ],
     [ "operator_entryt", "structoperator__entryt.html", "structoperator__entryt" ],
     [ "optionst", "classoptionst.html", "classoptionst" ],
     [ "or_exprt", "classor__exprt.html", "classor__exprt" ],

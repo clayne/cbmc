@@ -1,5 +1,16 @@
 var NAVTREEINDEX127 =
 {
+"refine__arithmetic_8cpp.html#a090a0b2bbb0e01b8ec51121970d550c1":[9,0,2,27,6,2,1],
+"refine__arithmetic_8cpp.html#a5214830f24120bc5f48db5a26b1bcffa":[9,0,2,27,6,2,0],
+"refine__arithmetic_8cpp_source.html":[9,0,2,27,6,2],
+"refine__arrays_8cpp.html":[9,0,2,27,6,3],
+"refine__arrays_8cpp_source.html":[9,0,2,27,6,3],
+"refined__string__type_8cpp.html":[9,0,2,30,173],
+"refined__string__type_8cpp_source.html":[9,0,2,30,173],
+"refined__string__type_8h.html":[9,0,2,30,174],
+"refined__string__type_8h.html#a5b93d2904cbc67f6bdfe051358b53beb":[9,0,2,30,174,1],
+"refined__string__type_8h.html#a5d05d6bc03e7fe6c378440ece8ca9b70":[9,0,2,30,174,2],
+"refined__string__type_8h_source.html":[9,0,2,30,174],
 "remove__asm_8cpp.html":[9,0,2,2,2],
 "remove__asm_8cpp.html#a14896be88ccc1a63e459f83027977d9e":[9,0,2,2,2,2],
 "remove__asm_8cpp.html#a69dc8cffb2cada7572649bb91a8bbab6":[9,0,2,2,2,3],
@@ -238,16 +249,5 @@ var NAVTREEINDEX127 =
 "rename__symbol_8cpp_source.html":[9,0,2,30,177],
 "rename__symbol_8h.html":[9,0,2,30,178],
 "rename__symbol_8h_source.html":[9,0,2,30,178],
-"renamed_8h.html":[9,0,2,17,35],
-"renamed_8h.html#a114bea0981fd23e2726f9c03376f711c":[9,0,2,17,35,2],
-"renamed_8h.html#a12b6f080eb6cdc36761e4d2ca8cec5f7":[9,0,2,17,35,1],
-"renamed_8h.html#a12b6f080eb6cdc36761e4d2ca8cec5f7a0adffb24dae0c41be5b803f4d444f066":[9,0,2,17,35,1,3],
-"renamed_8h.html#a12b6f080eb6cdc36761e4d2ca8cec5f7a51451264203360e0ffacec9b6d8ef7c9":[9,0,2,17,35,1,0],
-"renamed_8h.html#a12b6f080eb6cdc36761e4d2ca8cec5f7ad4b8947b24b9747bce934e0a0afb7bb5":[9,0,2,17,35,1,2],
-"renamed_8h.html#a12b6f080eb6cdc36761e4d2ca8cec5f7ae5bc7ee7d6dda5340a28f91834f10543":[9,0,2,17,35,1,1],
-"renamed_8h.html#a68c860fe66697dd96efc0bff2d4b0845":[9,0,2,17,35,3],
-"renamed_8h_source.html":[9,0,2,17,35],
-"renaming__level_8cpp.html":[9,0,2,17,36],
-"renaming__level_8cpp.html#a5a9629e74e0f49f032345d5123be328b":[9,0,2,17,36,3],
-"renaming__level_8cpp.html#a5b423fc854996a0a8beb34d4cd17e2e1":[9,0,2,17,36,1]
+"renamed_8h.html":[9,0,2,17,35]
 };

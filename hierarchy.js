@@ -1694,6 +1694,8 @@ var hierarchy =
                 [ "isnan_exprt", "classisnan__exprt.html", null ],
                 [ "isnormal_exprt", "classisnormal__exprt.html", null ],
                 [ "live_object_exprt", "classlive__object__exprt.html", null ],
+                [ "onehot0_exprt", "classonehot0__exprt.html", null ],
+                [ "onehot_exprt", "classonehot__exprt.html", null ],
                 [ "sign_exprt", "classsign__exprt.html", null ],
                 [ "unary_overflow_exprt", "classunary__overflow__exprt.html", [
                   [ "unary_minus_overflow_exprt", "classunary__minus__overflow__exprt.html", null ]

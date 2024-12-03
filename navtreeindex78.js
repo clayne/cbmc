@@ -1,5 +1,16 @@
 var NAVTREEINDEX78 =
 {
+"dirty_8cpp.html":[9,0,2,0,21],
+"dirty_8cpp_source.html":[9,0,2,0,21],
+"dirty_8h.html":[9,0,2,0,22],
+"dirty_8h.html#a73ce342d434496160180b61ceb9f39a6":[9,0,2,0,22,2],
+"dirty_8h_source.html":[9,0,2,0,22],
+"disjunctive__polynomial__acceleration_8cpp.html":[9,0,2,15,0,9],
+"disjunctive__polynomial__acceleration_8cpp_source.html":[9,0,2,15,0,9],
+"disjunctive__polynomial__acceleration_8h.html":[9,0,2,15,0,10],
+"disjunctive__polynomial__acceleration_8h_source.html":[9,0,2,15,0,10],
+"document__properties_8cpp.html":[9,0,2,15,31],
+"document__properties_8cpp.html#a0aff1735dc2e315e2f1c4b229ea7a00d":[9,0,2,15,31,8],
 "document__properties_8cpp.html#a1ab6468603137cf29f127328b14694ca":[9,0,2,15,31,7],
 "document__properties_8cpp.html#a3b216937e18c5f01ed38354ec37f8882":[9,0,2,15,31,5],
 "document__properties_8cpp.html#a3c700f5859350d21a4df5ccf5f4ee391":[9,0,2,15,31,6],
@@ -238,16 +249,5 @@ var NAVTREEINDEX78 =
 "expr2statement__list_8cpp.html#a9712b10d4b823cc5da1ce12afcb67ff3":[9,0,2,28,0,10,1],
 "expr2statement__list_8cpp.html#abcd00492824d4f78df155d42c7b1b1ba":[9,0,2,28,0,10,2],
 "expr2statement__list_8cpp.html#acd1b97556dfbbac61063a63031d2f91d":[9,0,2,28,0,10,0],
-"expr2statement__list_8cpp.html#ad3e9fe0ec59d2dbb3982ababa042720c":[9,0,2,28,0,10,4],
-"expr2statement__list_8cpp.html#ad78d4d02a060d35db2216157182ee2f5":[9,0,2,28,0,10,13],
-"expr2statement__list_8cpp_source.html":[9,0,2,28,0,10],
-"expr2statement__list_8h.html":[9,0,2,28,0,11],
-"expr2statement__list_8h.html#a811f58e5f442a1d782dc4d06d5cb8310":[9,0,2,28,0,11,1],
-"expr2statement__list_8h.html#a832ecb55da038866575aa7e98d97c71c":[9,0,2,28,0,11,2],
-"expr2statement__list_8h_source.html":[9,0,2,28,0,11],
-"expr_8cpp.html":[9,0,2,30,43],
-"expr_8cpp.html#a2a03fe9407dd7022740277589ade8e4f":[9,0,2,30,43,0],
-"expr_8cpp.html#a776c94b64440c99ec0148ec5fdd85a3c":[9,0,2,30,43,1],
-"expr_8cpp_source.html":[9,0,2,30,43],
-"expr_8h.html":[9,0,2,30,44]
+"expr2statement__list_8cpp.html#ad3e9fe0ec59d2dbb3982ababa042720c":[9,0,2,28,0,10,4]
 };
